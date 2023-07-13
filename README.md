@@ -33,7 +33,7 @@ This packages provides a simple convenience wrapper around some basic sklearn ut
 ## Example Usage
 ```python
 import os
-from sklearn.datasets import load_breast_cancer
+from sklearn import datasets
 
 # Load the iris dataset
 iris = datasets.load_iris()
