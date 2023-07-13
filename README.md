@@ -36,11 +36,11 @@ import os
 from sklearn import datasets
 
 # Load the iris dataset
-iris = datasets.load_iris()
+data = datasets.load_iris()
 
 # Split the data into features and labels
-X = iris.data
-y = iris.target
+X = data.data
+y = data.target
 
 # Define clustering model
 from sklearn.cluster import KMeans
