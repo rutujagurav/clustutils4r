@@ -543,7 +543,7 @@ def eval_clustering(X=None, gt_labels=[],
                     make_silhoutte_plots=False, embed_data_in_2d=False):
     
     if not os.path.exists(RESULTS_DIR):
-        os.makedirs(RESULTS_DIR)
+        os.makedirs(RESULTS_DIR+'/silhouette_plots')
     
     # if dataset_type == 'features':
     return cluster_feats(X=X, gt_labels=gt_labels, 
