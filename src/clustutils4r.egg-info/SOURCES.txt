@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/clustutils4r/__init__.py
+src/clustutils4r/eval_clustering.py
+src/clustutils4r.egg-info/PKG-INFO
+src/clustutils4r.egg-info/SOURCES.txt
+src/clustutils4r.egg-info/dependency_links.txt
+src/clustutils4r.egg-info/requires.txt
+src/clustutils4r.egg-info/top_level.txt

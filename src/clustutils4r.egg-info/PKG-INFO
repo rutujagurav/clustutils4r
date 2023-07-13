@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: clustutils4r
+Version: 0.0.3
+Summary: Wrapper around some basic sklearn utilities for clustering.
+Home-page: https://github.com/rutujagurav/clustutils4r
+Author: Rutuja Gurav
+Author-email: Rutuja Gurav <rutujagurav100@gmail.com>
+Project-URL: Homepage, https://github.com/rutujagurav/clustutils4r
+Project-URL: Bug Tracker, https://github.com/rutujagurav/clustutils4r/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # Clustering Utilities
 
 This packages provides a simple convenience wrapper around some basic sklearn utilities for clustering. The only function available is `eval_clustering()`.
@@ -63,12 +79,8 @@ labelled_datapoints, nongt_metrics, gt_metrics \
 ```
 <!-- ### GT Metrics-->
 ![cm](tests/example_clustering/results/feats_clustering_gt_metrics.png)
-<!-- ![cm](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_gt_metrics.png) -->
+<!-- ![cm](https://github.com/rutujagurav/bcutils4r/blob/master/tests/example_classification/results/confusion_matrix.png) -->
 
 <!-- ### Non GT Metrics -->
 ![roc](tests/example_clustering/results/feats_clustering_nongt_metrics.png)
-<!-- ![roc](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_nongt_metrics.png) -->
-
-<!-- ### Sil Plots -->
-![roc](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
-<!-- ![roc](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->
+<!-- ![roc](https://github.com/rutujagurav/bcutils4r/blob/master/tests/example_classification/results/classwise_roc_curve.png) -->

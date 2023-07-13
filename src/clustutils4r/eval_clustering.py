@@ -320,7 +320,7 @@ def cluster_feats(X=None, gt_labels=[],
                   show=False, save=False, save_dir=None):
     
     if len(gt_labels)!=0:
-        print("Ground truth labels provided. Computing ground truth-based clustering metrics algon with non-ground truth based metrics.") 
+        print("Ground truth labels provided. Computing ground truth-based clustering metrics along with non-ground truth based metrics.") 
     
     labels = []
     gt_metrics = {}
