@@ -1,0 +1,1 @@
+Package created following this official python [documentation](https://packaging.python.org/en/latest/tutorials/packaging-projects/)

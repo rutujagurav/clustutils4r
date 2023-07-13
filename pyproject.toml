@@ -1,0 +1,25 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clustutils4r"
+version = "0.0.1"
+authors = [
+  { name="Rutuja Gurav", email="rutujagurav100@gmail.com" },
+]
+description = "Wrapper around some basic sklearn utilities for clustering."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ]
+
+[project.urls]
+"Homepage" = ""
+"Bug Tracker" = ""
