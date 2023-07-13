@@ -48,16 +48,16 @@ kmeans_model = KMeans()
 
 # Run the evaluation
 from clustutils4r.eval_clustering import eval_clustering
-range_clusters = list(range(2,10+1))
+range_clusters = list(range(3,15+1))
 labelled_datapoints, nongt_metrics, gt_metrics \
     = eval_clustering(X=X, gt_labels=y,
-                        model=kmeans_model,
+                        model=KMeans(),
                         num_clusters=range_clusters, num_runs=10,
                         annotate_topN_best_scores=True, annotN=3,
                         make_metrics_plots=True,
                         make_silhoutte_plots=False,
-                        show=True, save=True, 
-                        RESULTS_DIR=os.getcwd()+'/results',
+                        show=True, 
+                        save=True, RESULTS_DIR=os.getcwd()+'/results',
                     )
 
 ```
