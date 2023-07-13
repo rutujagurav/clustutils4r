@@ -55,7 +55,7 @@ labelled_datapoints, nongt_metrics, gt_metrics \
                         num_clusters=range_clusters, num_runs=10,
                         annotate_topN_best_scores=True, annotN=3,
                         make_metrics_plots=True,
-                        make_silhoutte_plots=False,
+                        make_silhoutte_plots=True, embed_data_in_2d=True,
                         show=True, 
                         save=True, RESULTS_DIR=os.getcwd()+'/results',
                     )
