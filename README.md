@@ -2,6 +2,9 @@
 
 This packages provides a simple convenience wrapper around some basic sklearn utilities for clustering. The only function available is `eval_clustering()`.
 
+## Installation
+`pip install clustutils4r`
+
 ## Available Parameters
 
 `model`: Clustering model object (untrained)
