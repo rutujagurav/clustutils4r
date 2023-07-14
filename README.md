@@ -4,11 +4,11 @@ This packages provides a simple convenience wrapper around some basic sklearn ut
 
 ## Available Parameters
 
-`model`: clustering model object (untrained)
+`model`: Clustering model object (untrained)
 
-`X`: Pandas DataFrame containing preprocessed, normalized, complete dataset features
+`X`: Numpy array containing preprocessed, normalized, complete dataset features
 
-`gt_labels`: Pandas Series containing encoded ground-truth labels for `X` (often not available)
+`gt_labels`: Numpy array containing encoded ground-truth labels for `X` (often not available)
 
 `num_clusters`: Range of no. of clusters to grid search over.
 
@@ -36,7 +36,7 @@ import os
 from sklearn import datasets
 
 # Load the iris dataset
-data = datasets.load_iris()
+data = datasets.load_digits()
 
 # Split the data into features and labels
 X = data.data
@@ -62,13 +62,13 @@ labelled_datapoints, nongt_metrics, gt_metrics \
 
 ```
 <!-- ### GT Metrics-->
-![cm](tests/example_clustering/results/feats_clustering_gt_metrics.png)
-<!-- ![cm](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_gt_metrics.png) -->
+![gt](tests/example_clustering/results/feats_clustering_gt_metrics.png)
+<!-- ![gt](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_gt_metrics.png) -->
 
 <!-- ### Non GT Metrics -->
-![roc](tests/example_clustering/results/feats_clustering_nongt_metrics.png)
-<!-- ![roc](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_nongt_metrics.png) -->
+![ngt](tests/example_clustering/results/feats_clustering_nongt_metrics.png)
+<!-- ![ngt](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_nongt_metrics.png) -->
 
 <!-- ### Sil Plots -->
-![roc](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
-<!-- ![roc](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->
+![sil](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
+<!-- ![sil](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->

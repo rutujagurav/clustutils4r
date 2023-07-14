@@ -1,8 +1,4 @@
-from cProfile import label
-from turtle import title
 import warnings
-
-from torch import gt, le
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import matplotlib.pyplot as plt
 plt.rcParams['font.family'] = 'serif'
@@ -355,7 +351,6 @@ def cluster_feats(X=None, gt_labels=[],
                 best_run_sil_score_ = nongt_metrics_['Silhouette']
                 best_run_lbls_ = run_lbls_
             
-        ## This is using the last run's labels. TODO: Replace this with "best" score labels.
         print("[k={}] Best run is {} (out of {}) with {} score = {}"\
               .format(n_clusters, best_run_id_, num_runs, best_run_metric_, best_score_))
         cluster_labels = best_run_lbls_
