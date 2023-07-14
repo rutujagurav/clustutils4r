@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: clustutils4r
-Version: 0.0.3
+Version: 0.0.6
 Summary: Wrapper around some basic sklearn utilities for clustering.
 Home-page: https://github.com/rutujagurav/clustutils4r
 Author: Rutuja Gurav
@@ -18,13 +18,16 @@ License-File: LICENSE
 
 This packages provides a simple convenience wrapper around some basic sklearn utilities for clustering. The only function available is `eval_clustering()`.
 
+## Installation
+`pip install clustutils4r`
+
 ## Available Parameters
 
-`model`: clustering model object (untrained)
+`model`: Clustering model object (untrained)
 
-`X`: Pandas DataFrame containing preprocessed, normalized, complete dataset features
+`X`: Numpy array containing preprocessed, normalized, complete dataset features
 
-`gt_labels`: Pandas Series containing encoded ground-truth labels for `X` (often not available)
+`gt_labels`: Numpy array containing encoded ground-truth labels for `X` (often not available)
 
 `num_clusters`: Range of no. of clusters to grid search over.
 
@@ -52,7 +55,7 @@ import os
 from sklearn import datasets
 
 # Load the iris dataset
-data = datasets.load_iris()
+data = datasets.load_digits()
 
 # Split the data into features and labels
 X = data.data
@@ -64,23 +67,40 @@ kmeans_model = KMeans()
 
 # Run the evaluation
 from clustutils4r.eval_clustering import eval_clustering
-range_clusters = list(range(2,10+1))
+range_clusters = list(range(3,15+1))
 labelled_datapoints, nongt_metrics, gt_metrics \
     = eval_clustering(X=X, gt_labels=y,
-                        model=kmeans_model,
+                        model=KMeans(),
                         num_clusters=range_clusters, num_runs=10,
                         annotate_topN_best_scores=True, annotN=3,
                         make_metrics_plots=True,
-                        make_silhoutte_plots=False,
-                        show=True, save=True, 
-                        RESULTS_DIR=os.getcwd()+'/results',
+                        make_silhoutte_plots=True, embed_data_in_2d=True,
+                        show=True, 
+                        save=True, RESULTS_DIR=os.getcwd()+'/results',
                     )
 
 ```
-<!-- ### GT Metrics-->
-![cm](tests/example_clustering/results/feats_clustering_gt_metrics.png)
-<!-- ![cm](https://github.com/rutujagurav/bcutils4r/blob/master/tests/example_classification/results/confusion_matrix.png) -->
 
-<!-- ### Non GT Metrics -->
-![roc](tests/example_clustering/results/feats_clustering_nongt_metrics.png)
-<!-- ![roc](https://github.com/rutujagurav/bcutils4r/blob/master/tests/example_classification/results/classwise_roc_curve.png) -->
+![ch](tests/example_clustering/results/nongt_metrics_plots/cal_har.png)
+![sil](tests/example_clustering/results/nongt_metrics_plots/dav_bou.png)
+![sil](tests/example_clustering/results/nongt_metrics_plots/hopkn.png)
+![sil](tests/example_clustering/results/nongt_metrics_plots/sil.png)
+
+<!-- ![ch](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/cal_har.png)
+![sil](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/dav_bou.png)
+![sil](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/hopkn.png)
+![sil](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/sil.png) -->
+
+![fmi](tests/example_clustering/results/gt_metrics_plots/fmi.png)
+![mi](tests/example_clustering/results/gt_metrics_plots/mutual_info.png)
+![hcv](tests/example_clustering/results/gt_metrics_plots/hcv.png)
+![ri](tests/example_clustering/results/gt_metrics_plots/rand_index.png)
+
+<!-- ![fmi](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/fmi.png)
+![mi](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/mutual_info.png)
+![hcv](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/hcv.png)
+![ri](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/rand_index.png) -->
+
+![silplt](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
+
+<!-- ![silplt](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->

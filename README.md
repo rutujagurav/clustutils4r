@@ -64,14 +64,27 @@ labelled_datapoints, nongt_metrics, gt_metrics \
                     )
 
 ```
-<!-- ### GT Metrics-->
-![gt](tests/example_clustering/results/feats_clustering_gt_metrics.png)
-<!-- ![gt](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_gt_metrics.png) -->
 
-<!-- ### Non GT Metrics -->
-![ngt](tests/example_clustering/results/feats_clustering_nongt_metrics.png)
-<!-- ![ngt](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/feats_clustering_nongt_metrics.png) -->
+![ch](tests/example_clustering/results/nongt_metrics_plots/cal_har.png)
+![sil](tests/example_clustering/results/nongt_metrics_plots/dav_bou.png)
+![sil](tests/example_clustering/results/nongt_metrics_plots/hopkn.png)
+![sil](tests/example_clustering/results/nongt_metrics_plots/sil.png)
 
-<!-- ### Sil Plots -->
-![sil](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
-<!-- ![sil](https://github.com/rutujagurav/clustutils4r/blob/master/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->
+<!-- ![ch](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/cal_har.png)
+![sil](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/dav_bou.png)
+![sil](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/hopkn.png)
+![sil](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/nongt_metrics_plots/sil.png) -->
+
+![fmi](tests/example_clustering/results/gt_metrics_plots/fmi.png)
+![mi](tests/example_clustering/results/gt_metrics_plots/mutual_info.png)
+![hcv](tests/example_clustering/results/gt_metrics_plots/hcv.png)
+![ri](tests/example_clustering/results/gt_metrics_plots/rand_index.png)
+
+<!-- ![fmi](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/fmi.png)
+![mi](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/mutual_info.png)
+![hcv](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/hcv.png)
+![ri](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/rand_index.png) -->
+
+![silplt](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
+
+<!-- ![silplt](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->

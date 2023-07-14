@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clustutils4r"
-version = "0.0.1"
+version = "0.0.6"
 authors = [
   { name="Rutuja Gurav", email="rutujagurav100@gmail.com" },
 ]
@@ -21,5 +21,5 @@ classifiers=[
     ]
 
 [project.urls]
-"Homepage" = ""
-"Bug Tracker" = ""
+"Homepage" = "https://github.com/rutujagurav/clustutils4r"
+"Bug Tracker" = "https://github.com/rutujagurav/clustutils4r/issues"

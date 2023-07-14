@@ -5,15 +5,15 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="clustutils4r", # Replace with your own username
-    version="0.0.1",
+    version="0.0.6",
     author="Rutuja Gurav",
     author_email="rutujagurav100@gmail.com",
     description="Wrapper around some basic sklearn utilities for clustering.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/rutujagurav/clustutils4r",
     project_urls={
-        "Bug Tracker": "",
+        "Bug Tracker": "https://github.com/rutujagurav/clustutils4r/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",

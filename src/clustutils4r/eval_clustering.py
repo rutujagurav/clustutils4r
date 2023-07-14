@@ -106,11 +106,11 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
         v_measure_scores_std = [0*0]*len(v_measure_scores_mean)
         fmi_scores_std = [0*0]*len(fmi_scores_mean)
     
-    fig, axs = plt.subplots(2, 2, figsize=(10,10))
-
+    # fig, axs = plt.subplots(2, 2, figsize=(10,10))
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## RI
-    axs[0,0].plot(num_clusters, ri_scores_mean, label='RI')
-    axs[0,0].fill_between(num_clusters, 
+    ax.plot(num_clusters, ri_scores_mean, label='RI')
+    ax.fill_between(num_clusters, 
                         ri_scores_mean - ri_scores_std, 
                         ri_scores_mean + ri_scores_std, 
                         alpha=0.2)
@@ -118,22 +118,31 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
     # axs[0,0].set_xlabel("No. of Clusters")
 
     ## ARI
-    axs[0,0].plot(num_clusters, ari_scores_mean, label='ARI')
-    axs[0,0].fill_between(num_clusters,
+    ax.plot(num_clusters, ari_scores_mean, label='ARI')
+    ax.fill_between(num_clusters,
                         ari_scores_mean - ari_scores_std,
                         ari_scores_mean + ari_scores_std,
                         alpha=0.2)
-    # axs[0,0].set_title("Adjusted Rand Index")
-    axs[0,0].set_xlabel("No. of Clusters")
+    ax.set_title("Rand Index")
+    ax.set_xlabel("No. of Clusters")
     # axs[0,0].set_ylim(0,1)
     if annotate_topN_best_scores:
         top_k_indices = np.array(ari_scores_mean).argsort()[-annotN:][::-1]
         for i in top_k_indices:
             value = ari_scores_mean[i]
-            axs[0,0].text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
 
-    axs[0,0].legend(title='Metric', loc='best')
+    ax.legend(title='Metric', loc='best')
 
+    plt.tight_layout()    
+    if save:
+        plt.savefig(os.path.join(save_dir, 'gt_metrics_plots/rand_index.png'), dpi=300)
+    if show:
+        plt.show()
+    plt.close()    
+
+
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## MI
     # axs[0,1].plot(num_clusters, mi_scores_mean, label='MI')
     # axs[0,1].fill_between(num_clusters,
@@ -142,82 +151,104 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
     #                     alpha=0.2)
 
     ## AMI
-    axs[0,1].plot(num_clusters, ami_scores_mean, label='AMI')
-    axs[0,1].fill_between(num_clusters,
+    ax.plot(num_clusters, ami_scores_mean, label='AMI')
+    ax.fill_between(num_clusters,
                         ami_scores_mean - ami_scores_std,
                         ami_scores_mean + ami_scores_std,
                         alpha=0.2)
 
     ## NMI
-    axs[0,1].plot(num_clusters, nmi_scores_mean, label='NMI')
-    axs[0,1].fill_between(num_clusters,
+    ax.plot(num_clusters, nmi_scores_mean, label='NMI')
+    ax.fill_between(num_clusters,
                         nmi_scores_mean - nmi_scores_std,
                         nmi_scores_mean + nmi_scores_std,
                         alpha=0.2)
     
-    axs[0,1].set_xlabel("No. of Clusters")
+    ax.set_xlabel("No. of Clusters")
     # axs[0,1].set_ylim(0,1)
     if annotate_topN_best_scores:
         top_k_indices = np.array(nmi_scores_mean).argsort()[-annotN:][::-1]
         for i in top_k_indices:
             value = nmi_scores_mean[i]
-            axs[0,1].text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
-    axs[0,1].legend(title='Metric', loc='best')
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
+    ax.legend(title='Metric', loc='best')
 
+    plt.tight_layout()    
+    if save:
+        plt.savefig(os.path.join(save_dir, 'gt_metrics_plots/mutual_info.png'), dpi=300)
+    if show:
+        plt.show()
+    plt.close()
+
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## Homogeneity
-    axs[1,0].plot(num_clusters, homogeneity_scores_mean, label='Homogeneity')
-    axs[1,0].fill_between(num_clusters,
+    ax.plot(num_clusters, homogeneity_scores_mean, label='Homogeneity')
+    ax.fill_between(num_clusters,
                         homogeneity_scores_mean - homogeneity_scores_std,
                         homogeneity_scores_mean + homogeneity_scores_std,
                         alpha=0.2)
 
     ## Completeness
-    axs[1,0].plot(num_clusters, completeness_scores_mean, label='Completeness')
-    axs[1,0].fill_between(num_clusters,
+    ax.plot(num_clusters, completeness_scores_mean, label='Completeness')
+    ax.fill_between(num_clusters,
                         completeness_scores_mean - completeness_scores_std,
                         completeness_scores_mean + completeness_scores_std,
                         alpha=0.2)
 
     ## V-Measure
-    axs[1,0].plot(num_clusters, v_measure_scores_mean, label='V-Measure')
-    axs[1,0].fill_between(num_clusters,
+    ax.plot(num_clusters, v_measure_scores_mean, label='V-Measure')
+    ax.fill_between(num_clusters,
                         v_measure_scores_mean - v_measure_scores_std,
                         v_measure_scores_mean + v_measure_scores_std,
                         alpha=0.2)
     
-    axs[1,0].set_xlabel("No. of Clusters")
-    # axs[1,0].set_ylim(0,1)
+    ax.set_xlabel("No. of Clusters")
+    # ax.set_ylim(0,1)
     if annotate_topN_best_scores:
         top_k_indices = np.array(v_measure_scores_mean).argsort()[-annotN:][::-1]
         for i in top_k_indices:
             value = v_measure_scores_mean[i]
-            axs[1,0].text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
-    axs[1,0].legend(title='Metric', loc='best')
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
+    ax.legend(title='Metric', loc='best')
 
+    plt.tight_layout()    
+    if save:
+        plt.savefig(os.path.join(save_dir, 'gt_metrics_plots/hcv.png'), dpi=300)
+    if show:
+        plt.show()
+    plt.close()
+
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## FMI
-    axs[1,1].plot(num_clusters, fmi_scores_mean, label='FMI')
-    axs[1,1].fill_between(num_clusters,
+    ax.plot(num_clusters, fmi_scores_mean, label='FMI')
+    ax.fill_between(num_clusters,
                         fmi_scores_mean - fmi_scores_std,
                         fmi_scores_mean + fmi_scores_std,
                         alpha=0.2)
-    # axs[1,1].set_title("Fowlkes-Mallows Index")
-    axs[1,1].set_xlabel("No. of Clusters")
-    # axs[1,1].set_ylim(0,1)
+    ax.set_title("Fowlkes-Mallows Index")
+    ax.set_xlabel("No. of Clusters")
+    # ax.set_ylim(0,1)
     if annotate_topN_best_scores:
         top_k_indices = np.array(fmi_scores_mean).argsort()[-annotN:][::-1]
         for i in top_k_indices:
             value = fmi_scores_mean[i]
-            axs[1,1].text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
-    axs[1,1].legend(title='Metric', loc='best')
-
-
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
+    # axs[1,1].legend(title='Metric', loc='best')
     plt.tight_layout()    
     if save:
-        print("Saving ground truth-based clustering metrics plot at {}".format(os.path.join(save_dir, 'feats_clustering_metrics.png')))
-        plt.savefig(os.path.join(save_dir, 'feats_clustering_gt_metrics.png'), dpi=300)
+        plt.savefig(os.path.join(save_dir, 'gt_metrics_plots/fmi.png'), dpi=300)
     if show:
         plt.show()
-    plt.close()    
+    plt.close()
+
+
+    # plt.tight_layout()    
+    # if save:
+    #     print("Saving ground truth-based clustering metrics plot at {}".format(os.path.join(save_dir, 'feats_clustering_metrics.png')))
+    #     plt.savefig(os.path.join(save_dir, 'feats_clustering_gt_metrics.png'), dpi=300)
+    # if show:
+    #     plt.show()
+    # plt.close()    
 
 
 def plot_nongt_metrics(nongt_metrics=None, 
@@ -245,67 +276,101 @@ def plot_nongt_metrics(nongt_metrics=None,
         db_scores_std = [0.0]*len(db_scores_mean)
         hpkn_scores_std = [0.0]*len(hpkn_scores_mean)
     
-    fig, axs = plt.subplots(2,2, figsize=(10,10))
+    # fig, axs = plt.subplots(2,2, figsize=(10,10))
 
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## Silhouette
-    axs[0,0].plot(num_clusters, sil_scores_mean)
-    axs[0,0].fill_between(num_clusters, 
+    ax.plot(num_clusters, sil_scores_mean)
+    ax.fill_between(num_clusters, 
                         sil_scores_mean - sil_scores_std, 
                         sil_scores_mean + sil_scores_std, 
                         color='b', alpha=0.2)
-    axs[0,0].set_title("Avg. Silhoutte Score\n(-1=incorrect, 0=overlap, 1=dense)")
-    axs[0,0].set_xlabel("No. of Clusters")
-    axs[0,0].set_ylim(-1.1,1.1)
+    ax.set_title("Avg. Silhoutte Score\n(-1=incorrect, 0=overlap, 1=dense)")
+    ax.set_xlabel("No. of Clusters")
+    ax.set_ylim(-1.1,1.1)
 
+    plt.tight_layout()    
+    if save:
+        plt.savefig(os.path.join(save_dir, 'nongt_metrics_plots/sil.png'), dpi=300)
+    if show:
+        plt.show()
+    plt.close()
+    
+    
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## Calinski-Harabasz
-    axs[1,0].plot(num_clusters, ch_scores_mean)
-    axs[1,0].fill_between(num_clusters, 
+    ax.plot(num_clusters, ch_scores_mean)
+    ax.fill_between(num_clusters, 
                         ch_scores_mean - ch_scores_std, 
                         ch_scores_mean + ch_scores_std, 
                         color='b', alpha=0.2)
-    axs[1,0].set_title("Calinski Harabasz Score\n(higher=dense,well-separated)")
-    axs[1,0].set_xlabel("No. of Clusters")
+    ax.set_title("Calinski Harabasz Score\n(higher=dense,well-separated)")
+    ax.set_xlabel("No. of Clusters")
     
     if annotate_topN_best_scores:
         # # top_k_indices = sorted(range(len(ch_scores)), key=lambda i: ch_scores[i], reverse=True)[:k]
         top_k_indices = np.array(ch_scores_mean).argsort()[-annotN:][::-1]
         for i in top_k_indices:
             value = ch_scores_mean[i]
-            axs[1,0].text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
 
+    plt.tight_layout()    
+    if save:
+        plt.savefig(os.path.join(save_dir, 'nongt_metrics_plots/cal_har.png'), dpi=300)
+    if show:
+        plt.show()
+    plt.close()
+
+
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ## Davies-Bouldin
-    axs[1,1].plot(num_clusters, db_scores_mean)
-    axs[1,1].fill_between(num_clusters, 
+    ax.plot(num_clusters, db_scores_mean)
+    ax.fill_between(num_clusters, 
                         db_scores_mean - db_scores_std, 
                         db_scores_mean + db_scores_std, 
                         color='b', alpha=0.2)
-    axs[1,1].set_title("Davies Bouldin Score\n(lower=better)")
-    axs[1,1].set_xlabel("No. of Clusters") 
+    ax.set_title("Davies Bouldin Score\n(lower=better)")
+    ax.set_xlabel("No. of Clusters") 
     
     if annotate_topN_best_scores:
         # # top_k_indices = sorted(range(len(db_scores)), key=lambda i: db_scores[i], reverse=False)[:k]
         top_k_indices = np.array(db_scores_mean).argsort()[:annotN]
         for i in top_k_indices:
             value = db_scores_mean[i]
-            axs[1,1].text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
     
-    ## Hopkins
-    axs[0,1].plot(num_clusters, hpkn_scores_mean)
-    axs[0,1].fill_between(num_clusters, 
-                        hpkn_scores_mean - hpkn_scores_std, 
-                        hpkn_scores_mean + hpkn_scores_std, 
-                        color='b', alpha=0.2)
-    axs[0,1].set_title("Hopkins Statistic\n(1=clustered, 0.5=random, 0=uniforrm)")
-    axs[0,1].set_xlabel("No. of Clusters")
-    axs[0,1].set_ylim(-0.1,1.1) 
-
     plt.tight_layout()    
     if save:
-        print("Saving non-ground truth-based clustering metrics plot at {}".format(os.path.join(save_dir, 'feats_clustering_metrics.png')))
-        plt.savefig(os.path.join(save_dir, 'feats_clustering_nongt_metrics.png'), dpi=300)
+        plt.savefig(os.path.join(save_dir, 'nongt_metrics_plots/dav_bou.png'), dpi=300)
     if show:
         plt.show()
     plt.close()
+    
+    fig, ax = plt.subplots(1, 1, figsize=(5,5))
+    ## Hopkins
+    ax.plot(num_clusters, hpkn_scores_mean)
+    ax.fill_between(num_clusters, 
+                        hpkn_scores_mean - hpkn_scores_std, 
+                        hpkn_scores_mean + hpkn_scores_std, 
+                        color='b', alpha=0.2)
+    ax.set_title("Hopkins Statistic\n(1=clustered, 0.5=random, 0=uniforrm)")
+    ax.set_xlabel("No. of Clusters")
+    ax.set_ylim(-0.1,1.1) 
+
+    plt.tight_layout()    
+    if save:
+        plt.savefig(os.path.join(save_dir, 'nongt_metrics_plots/hopkn.png'), dpi=300)
+    if show:
+        plt.show()
+    plt.close()
+
+    # plt.tight_layout()    
+    # if save:
+    #     print("Saving non-ground truth-based clustering metrics plot at {}".format(os.path.join(save_dir, 'feats_clustering_metrics.png')))
+    #     plt.savefig(os.path.join(save_dir, 'feats_clustering_nongt_metrics.png'), dpi=300)
+    # if show:
+    #     plt.show()
+    # plt.close()
 
 def cluster_feats(X=None, gt_labels=[],
                 #   algorithm='k-Means',
@@ -539,6 +604,8 @@ def eval_clustering(X=None, gt_labels=[],
     
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR+'/silhouette_plots')
+        os.makedirs(RESULTS_DIR+'/gt_metrics_plots')
+        os.makedirs(RESULTS_DIR+'/nongt_metrics_plots')
     
     # if dataset_type == 'features':
     return cluster_feats(X=X, gt_labels=gt_labels, 
