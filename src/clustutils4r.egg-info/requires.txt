@@ -1,4 +1,0 @@
-seaborn
-opentsne
-pyclustertend
-scikit-learn
