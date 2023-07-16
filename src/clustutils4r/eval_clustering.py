@@ -51,14 +51,21 @@ def calc_gt_metrics(gt_labels=[], cluster_labels=[]):
     return dict(zip(metric_names, [ri, ari, mi, ami, nmi, homogeneity, completeness, v_measure, fmi]))
 
 def calc_nongt_metrics(X=None, cluster_labels=None):
-    metric_names = ['Silhouette', 'Calinski-Harabasz', 'Davies-Bouldin', 'Hopkins']
+    metric_names = ['Silhouette', 
+                                'Calinski-Harabasz', 'Davies-Bouldin', 
+                                # 'Hopkins'
+                            ]
     silhouette_avg = silhouette_score(X, cluster_labels).round(3)
     calinski_harabasz_score_avg = calinski_harabasz_score(X, cluster_labels).round(3)
     davies_bouldin_score_avg = davies_bouldin_score(X, cluster_labels).round(3)
-    hopkins_score = hopkins_statistic(X).round(3)
+    # hopkins_score = hopkins_statistic(X).round(3)
     
     # return silhouette_avg,calinski_harabasz_score_avg, davies_bouldin_score_avg, hopkins_score
-    return dict(zip(metric_names, [silhouette_avg, calinski_harabasz_score_avg, davies_bouldin_score_avg, hopkins_score]))
+    return dict(zip(metric_names, [silhouette_avg, 
+                                                    calinski_harabasz_score_avg, 
+                                                    davies_bouldin_score_avg, 
+                                                    # hopkins_score
+                                                ]))
 
 def plot_gt_metrics(gt_metrics=None, num_clusters=None,
                     annotate_topN_best_scores=True, annotN=3,
@@ -250,7 +257,6 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
     #     plt.show()
     # plt.close()    
 
-
 def plot_nongt_metrics(nongt_metrics=None, 
                        num_clusters=None, annotate_topN_best_scores=False, annotN=3,
                        show=False, save=False, save_dir=None):
@@ -258,23 +264,23 @@ def plot_nongt_metrics(nongt_metrics=None,
         sil_scores_mean = nongt_metrics['mean']['Silhouette'].values
         ch_scores_mean = nongt_metrics['mean']['Calinski-Harabasz'].values
         db_scores_mean = nongt_metrics['mean']['Davies-Bouldin'].values
-        hpkn_scores_mean = nongt_metrics['mean']['Hopkins'].values
+        # hpkn_scores_mean = nongt_metrics['mean']['Hopkins'].values
 
         sil_scores_std = nongt_metrics['std']['Silhouette'].values
         ch_scores_std = nongt_metrics['std']['Calinski-Harabasz'].values
         db_scores_std = nongt_metrics['std']['Davies-Bouldin'].values
-        hpkn_scores_std = nongt_metrics['std']['Hopkins'].values
+        # hpkn_scores_std = nongt_metrics['std']['Hopkins'].values
 
     elif isinstance(nongt_metrics, pd.DataFrame):
         sil_scores_mean = nongt_metrics['Silhouette'].values
         ch_scores_mean = nongt_metrics['Calinski-Harabasz'].values
         db_scores_mean = nongt_metrics['Davies-Bouldin'].values
-        hpkn_scores_mean = nongt_metrics['Hopkins'].values
+        # hpkn_scores_mean = nongt_metrics['Hopkins'].values
 
         sil_scores_std = [0.0]*len(sil_scores_mean)
         ch_scores_std = [0.0]*len(ch_scores_mean)
         db_scores_std = [0.0]*len(db_scores_mean)
-        hpkn_scores_std = [0.0]*len(hpkn_scores_mean)
+        # hpkn_scores_std = [0.0]*len(hpkn_scores_mean)
     
     # fig, axs = plt.subplots(2,2, figsize=(10,10))
 
@@ -284,7 +290,7 @@ def plot_nongt_metrics(nongt_metrics=None,
     ax.fill_between(num_clusters, 
                         sil_scores_mean - sil_scores_std, 
                         sil_scores_mean + sil_scores_std, 
-                        color='b', alpha=0.2)
+                        alpha=0.2)
     ax.set_title("Avg. Silhoutte Score\n(-1=incorrect, 0=overlap, 1=dense)")
     ax.set_xlabel("No. of Clusters")
     ax.set_ylim(-1.1,1.1)
@@ -303,7 +309,7 @@ def plot_nongt_metrics(nongt_metrics=None,
     ax.fill_between(num_clusters, 
                         ch_scores_mean - ch_scores_std, 
                         ch_scores_mean + ch_scores_std, 
-                        color='b', alpha=0.2)
+                        alpha=0.2)
     ax.set_title("Calinski Harabasz Score\n(higher=dense,well-separated)")
     ax.set_xlabel("No. of Clusters")
     
@@ -328,7 +334,7 @@ def plot_nongt_metrics(nongt_metrics=None,
     ax.fill_between(num_clusters, 
                         db_scores_mean - db_scores_std, 
                         db_scores_mean + db_scores_std, 
-                        color='b', alpha=0.2)
+                        alpha=0.2)
     ax.set_title("Davies Bouldin Score\n(lower=better)")
     ax.set_xlabel("No. of Clusters") 
     
@@ -346,23 +352,23 @@ def plot_nongt_metrics(nongt_metrics=None,
         plt.show()
     plt.close()
     
-    fig, ax = plt.subplots(1, 1, figsize=(5,5))
-    ## Hopkins
-    ax.plot(num_clusters, hpkn_scores_mean)
-    ax.fill_between(num_clusters, 
-                        hpkn_scores_mean - hpkn_scores_std, 
-                        hpkn_scores_mean + hpkn_scores_std, 
-                        color='b', alpha=0.2)
-    ax.set_title("Hopkins Statistic\n(1=clustered, 0.5=random, 0=uniforrm)")
-    ax.set_xlabel("No. of Clusters")
-    ax.set_ylim(-0.1,1.1) 
+    # fig, ax = plt.subplots(1, 1, figsize=(5,5))
+    # ## Hopkins
+    # ax.plot(num_clusters, hpkn_scores_mean)
+    # ax.fill_between(num_clusters, 
+    #                     hpkn_scores_mean - hpkn_scores_std, 
+    #                     hpkn_scores_mean + hpkn_scores_std, 
+    #                     alpha=0.2)
+    # ax.set_title("Hopkins Statistic\n(1=clustered, 0.5=random, 0=uniforrm)")
+    # ax.set_xlabel("No. of Clusters")
+    # ax.set_ylim(-0.1,1.1) 
 
-    plt.tight_layout()    
-    if save:
-        plt.savefig(os.path.join(save_dir, 'nongt_metrics_plots/hopkn.png'), dpi=300)
-    if show:
-        plt.show()
-    plt.close()
+    # plt.tight_layout()    
+    # if save:
+    #     plt.savefig(os.path.join(save_dir, 'nongt_metrics_plots/hopkn.png'), dpi=300)
+    # if show:
+    #     plt.show()
+    # plt.close()
 
     # plt.tight_layout()    
     # if save:
@@ -374,7 +380,7 @@ def plot_nongt_metrics(nongt_metrics=None,
 
 def cluster_feats(X=None, gt_labels=[],
                 #   algorithm='k-Means',
-                  model=None,
+                  model=None, model_params={}, n_clusters_param_name='n_clusters',
                   num_clusters = [2,3,5,10], num_runs=10, 
                   make_metrics_plots=True, annotate_topN_best_scores=False, annotN=3,
                   make_silhoutte_plots=True, embed_data_in_2d = False,
@@ -389,6 +395,8 @@ def cluster_feats(X=None, gt_labels=[],
 
     gt_metrics_mean, gt_metrics_std = {}, {}
     nongt_metrics_mean, nongt_metrics_std = {}, {}
+
+    print("Hopkins Statistic (1=clustered, 0.5=random, 0=uniforrm) : {}".format(hopkins_statistic(X).round(3)))
     
     for n_clusters in num_clusters:
         ## Do 100 runs of kmeans for a given value of k? EXPENSIVE!
@@ -399,9 +407,10 @@ def cluster_feats(X=None, gt_labels=[],
         best_run_sil_score_, best_score_ = 0,0
         best_run_metric_ = 'Calinski-Harabasz'  #'Silhouette'
         for run in range(num_runs):
-            # if algorithm == 'k-Means':
-            #     clusterer = KMeans(n_clusters=n_clusters, random_state=run)
-            clusterer = model.set_params(n_clusters=n_clusters, random_state=run)
+            model_params[n_clusters_param_name] = n_clusters
+            model_params['random_state'] = run
+            # print(model_params)
+            clusterer = model.set_params(**model_params) #n_clusters=n_clusters, random_state=run
             run_lbls_=clusterer.fit_predict(X)
 
             if len(gt_labels)!=0:
@@ -444,7 +453,7 @@ def cluster_feats(X=None, gt_labels=[],
         # print(nongt_metrics_std)
         # print(sys.exit())
             
-        ## -------------- Single Run -----------------
+        ## -------------- Single Run -------------------------------------------
         # Initialize the clusterer with n_clusters value and a random generator
         # seed of 10 for reproducibility.
         # clusterer = KMeans(n_clusters=n_clusters, random_state=10)
@@ -456,7 +465,7 @@ def cluster_feats(X=None, gt_labels=[],
         # nongt_metrics_ = calc_nongt_metrics(X=X, cluster_labels=cluster_labels)
         # nongt_metrics['k={}'.format(n_clusters)] = nongt_metrics_
         # silhouette_avg = nongt_metrics_['Silhouette']
-        ## -------------------------------------------
+        ## -----------------------------------------------------------------------
         
         if make_silhoutte_plots:
             # Create a subplot with 1 row and 2 columns
@@ -499,9 +508,9 @@ def cluster_feats(X=None, gt_labels=[],
                 # Compute the new y_lower for next plot
                 y_lower = y_upper + 10  # 10 for the 0 samples
 
-            ax1.set_title("The silhouette plot for the various clusters.")
-            ax1.set_xlabel("The silhouette coefficient values")
-            ax1.set_ylabel("Cluster label")
+            ax1.set_title("The silhouette plot for the various clusters", fontsize=20)
+            ax1.set_xlabel("The silhouette coefficient values", fontsize=20)
+            ax1.set_ylabel("Cluster label", fontsize=20)
 
             # The vertical line for average silhouette score of all the values
             ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
@@ -520,6 +529,7 @@ def cluster_feats(X=None, gt_labels=[],
                 ax2.scatter(
                     X_embedded[:, 0], X_embedded[:, 1], marker=".", s=100, lw=0, alpha=1, c=colors, edgecolor="k"
                 )
+                
             else:
                 print("Plotting first 2 features of the data...")
                 ax2.scatter(
@@ -542,7 +552,7 @@ def cluster_feats(X=None, gt_labels=[],
             # for i, c in enumerate(centers):
             #     ax2.scatter(c[0], c[1], marker="$%d$" % i, alpha=1, s=50, edgecolor="k")
 
-            ax2.set_title("The visualization of the clustered data.")
+            ax2.set_title("The visualization of the clustered data", fontsize=20)
             # ax2.set_xlabel("TSNE axis-1")
             # ax2.set_ylabel("TSNE axis-2")
             # ax2.set_xlabel("Feature space for the 1st feature")
@@ -551,7 +561,7 @@ def cluster_feats(X=None, gt_labels=[],
             plt.suptitle(
                 "Silhouette analysis for KMeans clustering on sample data with n_clusters = %d"
                 % n_clusters,
-                fontsize=14,
+                fontsize=20,
                 fontweight="bold",
             )
             
@@ -594,7 +604,7 @@ def cluster_feats(X=None, gt_labels=[],
 
 def eval_clustering(X=None, gt_labels=[], 
                     num_clusters = [2,3,5,10], num_runs=10, 
-                    model=None,
+                    model=None, n_clusters_param_name='n_clusters', model_params={},
                     # algorithm='k-Means',
                     dataset_type='features',
                     distance_metric='euclidean',
@@ -609,7 +619,7 @@ def eval_clustering(X=None, gt_labels=[],
     
     # if dataset_type == 'features':
     return cluster_feats(X=X, gt_labels=gt_labels, 
-                        model=model,
+                        model=model, n_clusters_param_name=n_clusters_param_name, model_params=model_params,
                         # algorithm=algorithm,
                         num_clusters=num_clusters, num_runs=num_runs,
                         show=show, save=save, save_dir=RESULTS_DIR,
