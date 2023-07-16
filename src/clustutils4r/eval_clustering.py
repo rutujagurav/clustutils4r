@@ -130,7 +130,7 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
                         ari_scores_mean - ari_scores_std,
                         ari_scores_mean + ari_scores_std,
                         alpha=0.2)
-    ax.set_title("Rand Index")
+    ax.set_title("Rand Index\n(RI: [0, 1], ARI: [-1, 1]; closer to 1 = better)")
     ax.set_xlabel("No. of Clusters")
     # axs[0,0].set_ylim(0,1)
     if annotate_topN_best_scores:
@@ -171,6 +171,7 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
                         nmi_scores_mean + nmi_scores_std,
                         alpha=0.2)
     
+    ax.set_title("Mutual Information\n([0,1]; closer to 1 = better)")
     ax.set_xlabel("No. of Clusters")
     # axs[0,1].set_ylim(0,1)
     if annotate_topN_best_scores:
@@ -209,6 +210,7 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
                         v_measure_scores_mean + v_measure_scores_std,
                         alpha=0.2)
     
+    ax.set_title("Conditional Entropy Analysis\n([0,1]; closer to 1 = better)")
     ax.set_xlabel("No. of Clusters")
     # ax.set_ylim(0,1)
     if annotate_topN_best_scores:
@@ -232,7 +234,7 @@ def plot_gt_metrics(gt_metrics=None, num_clusters=None,
                         fmi_scores_mean - fmi_scores_std,
                         fmi_scores_mean + fmi_scores_std,
                         alpha=0.2)
-    ax.set_title("Fowlkes-Mallows Index")
+    ax.set_title("Fowlkes-Mallows Index\n([0,1]; closer to 1 = better)")
     ax.set_xlabel("No. of Clusters")
     # ax.set_ylim(0,1)
     if annotate_topN_best_scores:
@@ -293,7 +295,14 @@ def plot_nongt_metrics(nongt_metrics=None,
                         alpha=0.2)
     ax.set_title("Avg. Silhoutte Score\n(-1=incorrect, 0=overlap, 1=dense)")
     ax.set_xlabel("No. of Clusters")
-    ax.set_ylim(-1.1,1.1)
+    # ax.set_ylim(-1.1,1.1)
+
+    if annotate_topN_best_scores:
+        # # top_k_indices = sorted(range(len(ch_scores)), key=lambda i: ch_scores[i], reverse=True)[:k]
+        top_k_indices = np.array(sil_scores_mean).argsort()[-annotN:][::-1]
+        for i in top_k_indices:
+            value = sil_scores_mean[i]
+            ax.text(i+num_clusters[0], value, f'{num_clusters[i]}', color='red')
 
     plt.tight_layout()    
     if save:
@@ -404,7 +413,7 @@ def cluster_feats(X=None, gt_labels=[],
         run_nongt_scores, run_gt_scores = {},{}
         
         best_run_id_, best_run_lbls_ = None, None
-        best_run_sil_score_, best_score_ = 0,0
+        best_run_sil_score_, best_score_ = 0, 0
         best_run_metric_ = 'Calinski-Harabasz'  #'Silhouette'
         for run in range(num_runs):
             model_params[n_clusters_param_name] = n_clusters
@@ -503,7 +512,7 @@ def cluster_feats(X=None, gt_labels=[],
                 )
 
                 # Label the silhouette plots with their cluster numbers at the middle
-                ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i))
+                ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i), fontsize=20)
 
                 # Compute the new y_lower for next plot
                 y_lower = y_upper + 10  # 10 for the 0 samples
@@ -513,7 +522,8 @@ def cluster_feats(X=None, gt_labels=[],
             ax1.set_ylabel("Cluster label", fontsize=20)
 
             # The vertical line for average silhouette score of all the values
-            ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+            ax1.axvline(x=silhouette_avg, color="red", linestyle="--", label="Avg. Silhouette Score")
+            # ax1.text(silhouette_avg+0.05, 100.0, "avg. silhouette score = {}".format(silhouette_avg), color="red", fontsize=20, rotation=90)
 
             ax1.set_yticks([])  # Clear the yaxis labels / ticks
             ax1.set_xticks([-1, 0, 0.2, 0.4, 0.6, 0.8, 1])
