@@ -56,6 +56,10 @@ model = KMeans()
 model_params = {'init':'k-means++', 'n_init':1}
 n_clusters_param_name='n_clusters'
 
+# model = GaussianMixture()
+# model_params = {'covariance_type':'full', 'n_init':1}
+# n_clusters_param_name='n_components'
+
 ## Run the evaluation
 range_clusters = list(range(3,10+1))
 labelled_datapoints, \
