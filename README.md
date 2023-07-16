@@ -85,6 +85,6 @@ labelled_datapoints, nongt_metrics, gt_metrics \
 ![hcv](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/hcv.png)
 ![ri](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/gt_metrics_plots/rand_index.png) -->
 
-![silplt](tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png)
+![silplt](tests/example_clustering/results/silhouette_plots/5_silhouette_plot.png)
 
 <!-- ![silplt](https://github.com/rutujagurav/clustutils4r/blob/main/tests/example_clustering/results/silhouette_plots/10_silhouette_plot.png) -->
