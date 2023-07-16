@@ -17,7 +17,7 @@ This packages provides a simple convenience wrapper around some basic sklearn ut
 
 `num_runs`: No. of runs per no. of cluster (defaults = 10).
 
-`make_metrics_plots`: Plot various clustering evaluation metrics. Depending on whether `gt_labels` are provided, you will get one or more plots - one for non-ground truth-based metrics and another for ground truth-based metrics. (default = `True`).
+`make_metrics_plots`: Plot various clustering evaluation metrics. Depending on whether `gt_labels` are provided, you will get one or two sets of plots - one for non-ground truth-based metrics and another for ground truth-based metrics. (default = `True`).
 
 `annotate_topN_best_scores`: Whether to annotate top N score in metrics plots (defined by `annotN`) (defaults = `True`).
 
