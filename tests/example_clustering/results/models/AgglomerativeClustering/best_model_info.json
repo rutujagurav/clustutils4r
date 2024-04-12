@@ -1,0 +1,1 @@
+{"model_name": "AgglomerativeClustering", "model_params": {"compute_distances": false, "compute_full_tree": "auto", "connectivity": null, "distance_threshold": null, "linkage": "complete", "memory": null, "metric": "euclidean", "n_clusters": 5}}

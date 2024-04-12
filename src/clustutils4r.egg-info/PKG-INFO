@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: clustutils4r
+Version: 1.0.1
+Summary: Wrapper around some basic sklearn utilities for clustering.
+Home-page: https://github.com/rutujagurav/clustutils4r
+Author: Rutuja Gurav
+Author-email: Rutuja Gurav <rutujagurav100@gmail.com>
+Project-URL: Homepage, https://github.com/rutujagurav/clustutils4r
+Project-URL: Bug Tracker, https://github.com/rutujagurav/clustutils4r/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # Clustering Utilities
 
 This packages provides a simple convenience wrapper around some basic sklearn utilities for clustering. The only function available is `eval_clustering()`.
