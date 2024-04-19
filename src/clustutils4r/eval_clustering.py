@@ -26,6 +26,7 @@ from sklearn.cluster import KMeans, SpectralClustering, \
     AffinityPropagation, MeanShift, \
     DBSCAN, HDBSCAN, \
     OPTICS, Birch
+
 from sklearn.metrics import silhouette_samples, silhouette_score
 from sklearn.metrics import calinski_harabasz_score, davies_bouldin_score
 
@@ -275,7 +276,7 @@ def plot_grid_search_metrics(hparam_search_results, metric="Calinski-Harabasz", 
 
     dimslist4parcoordplot = []
     for hparam_name in hparams:
-        if hparam_search_results[hparam_name].dtype in ["object", "categorical"]: 
+        if hparam_search_results[hparam_name].dtype in ["object", "categorical", "bool"]: 
             le = LabelEncoder()
             encoded_hparam = le.fit_transform(hparam_search_results[hparam_name])
             dimslist4parcoordplot.append(
@@ -311,23 +312,21 @@ def plot_grid_search_metrics(hparam_search_results, metric="Calinski-Harabasz", 
     )
     # fig.update_layout(width=1500, height=500)
     if save:
+        fig.update_layout(width=2000, height=500)
         fig.write_html(save_dir+"/parcoord_plot.html")
         fig.write_image(save_dir+"/parcoord_plot.png")
     if show:
         fig.show()
 
 def cluster_feats(X=None, gt_labels=[],
-                n_clusters_range = range(3,21),
-                clustering_algorithms=["KMeans", "AgglomerativeClustering", "HDBSCAN", "MeanShift"], 
-                num_runs=1, best_model_metric="Calinski-Harabasz",
-                make_silhoutte_plots=False, embed_data_in_2d = False,
-                show=False, save=False, save_dir=None):
-    '''
-    Cluster fixed-length segments of time as represented by a set of statistical features derived from time-segments data of all channels using partition clustering approach.
-    In partition clustering approach, the user must provide the number of clusters as a parameter and the dataset gets partitioned into those many clusters.
-    '''
-    # if len(gt_labels)!=0:
-    #     print("Ground truth labels provided. Computing ground truth-based clustering metrics along with non-ground truth based metrics.") 
+                    n_clusters_range = range(3,21),
+                    clustering_algorithms=["KMeans", "AgglomerativeClustering", "HDBSCAN", "MeanShift"], 
+                    num_runs=1, best_model_metric="Calinski-Harabasz",
+                    make_silhoutte_plots=False, embed_data_in_2d = False,
+                    show=False, save=False, save_dir=None):
+
+    if len(gt_labels)!=0:
+        print("Ground truth labels provided. Computing ground truth-based clustering metrics along with non-ground truth based metrics.") 
     
     # print("[Implementation: pyclustertend] Hopkins Statistic (0=clustered, 0.5=randomly distributed) : {}".format(hopkins_statistic(X).round(3)))
     # print("[Implementation: mine] Hopkins Statistic (1=clustered, 0.5=random, 0=uniforrm) : {}".format(hopkins_statistic_v2(X).round(3)))
@@ -528,18 +527,7 @@ def cluster_feats(X=None, gt_labels=[],
 
     return best_estimator_overall, grid_search_results
 
-def eval_clustering(X=None, gt_labels=[], 
-                    num_runs=1, 
-                    best_model_metric="Calinski-Harabasz",
-                    make_silhoutte_plots=False, embed_data_in_2d=False,
-                    show=False, save=False, save_dir=None):
-    
-    return cluster_feats(
-                            X=X, gt_labels=gt_labels,
-                            num_runs=num_runs, best_model_metric=best_model_metric,
-                            make_silhoutte_plots=make_silhoutte_plots, embed_data_in_2d=embed_data_in_2d,
-                            show=show, save=save, save_dir=save_dir
-                        )
+eval_clustering = cluster_feats
     
 if __name__ == "__main__":
     ## For testing purposes

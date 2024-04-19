@@ -1,1 +1,1 @@
-{"model_name": "AgglomerativeClustering", "model_params": {"compute_distances": false, "compute_full_tree": "auto", "connectivity": null, "distance_threshold": null, "linkage": "complete", "memory": null, "metric": "euclidean", "n_clusters": 5}}
+{"model_name": "KMeans", "model_params": {"algorithm": "lloyd", "copy_x": true, "init": "k-means++", "max_iter": 50, "n_clusters": 5, "n_init": "auto", "random_state": null, "tol": 0.01, "verbose": 0}}

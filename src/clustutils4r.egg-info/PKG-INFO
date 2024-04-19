@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: clustutils4r
-Version: 1.0.1
+Version: 1.0.2
 Summary: Wrapper around some basic sklearn utilities for clustering.
 Home-page: https://github.com/rutujagurav/clustutils4r
 Author: Rutuja Gurav
